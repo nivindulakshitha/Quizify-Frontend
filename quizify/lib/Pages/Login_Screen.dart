@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart'; // Import the HomeScreen
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -74,7 +75,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigate to the HomeScreen when login button is pressed
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF3366FF), // Button color
                       shape: RoundedRectangleBorder(
