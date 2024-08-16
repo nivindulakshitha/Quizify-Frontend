@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Timer(Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -13,12 +18,11 @@ class SplashScreen extends StatelessWidget {
           children: [
             // Logo Image
             Image.asset(
-              'assets/logo.png', // Make sure the image is correctly placed in assets directory
+              'assets/logo.png',
               width: 200.0,
               height: 200.0,
             ),
             const SizedBox(height: 20.0),
-            // App Name
           ],
         ),
       ),
