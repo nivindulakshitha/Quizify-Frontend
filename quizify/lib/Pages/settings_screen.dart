@@ -3,8 +3,7 @@ import 'package:quizify/widgets/custom_bottom_nav_bar.dart'; // Import the Custo
 import 'history_screen.dart'; // Import the HistoryScreen
 import 'add_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
-import 'home_screen.dart'; // Import the SettingsScreen
-
+import 'home_screen.dart'; // Import the HomeScreen
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -12,6 +11,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notificationsEnabled = true;
+  bool _darkModeEnabled = false;
+
   void _onTabSelected(int index) {
     Navigator.pushReplacement(
       context,
@@ -38,18 +40,102 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
         backgroundColor: Color(0xFF3366FF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          'Settings',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
       ),
-      body: Center(
-        child: Text(
-          "Settings Screen",
-          style: TextStyle(fontSize: 24),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            _buildSettingsItem(
+              context,
+              icon: Icons.notifications,
+              title: 'Notifications',
+              trailing: Switch(
+                value: _notificationsEnabled,
+                onChanged: (value) {
+                  setState(() {
+                    _notificationsEnabled = value;
+                  });
+                },
+              ),
+            ),
+            _buildSettingsItem(
+              context,
+              icon: Icons.dark_mode,
+              title: 'Dark mode',
+              trailing: Switch(
+                value: _darkModeEnabled,
+                onChanged: (value) {
+                  setState(() {
+                    _darkModeEnabled = value;
+                  });
+                },
+              ),
+            ),
+            _buildSettingsItem(
+              context,
+              icon: Icons.info,
+              title: 'About Us',
+              onTap: () {
+                // Navigate to the About Us screen
+              },
+            ),
+            _buildSettingsItem(
+              context,
+              icon: Icons.star,
+              title: 'Rate Us',
+              onTap: () {
+                // Navigate to the Rate Us screen or trigger rating action
+              },
+            ),
+            _buildSettingsItem(
+              context,
+              icon: Icons.logout,
+              title: 'Logout',
+              onTap: () {
+                // Handle logout action
+              },
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(
         onTabSelected: _onTabSelected,
       ),
+    );
+  }
+
+  Widget _buildSettingsItem(BuildContext context, {required IconData icon, required String title, Widget? trailing, VoidCallback? onTap}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.black54),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.black87,
+        ),
+      ),
+      trailing: trailing ?? Icon(Icons.arrow_forward_ios, color: Colors.black54),
+      onTap: onTap,
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      tileColor: Colors.white,
     );
   }
 }
