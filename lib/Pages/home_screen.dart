@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Text(
-                'Prince Patel',
+                'Nadun Daluwatta',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           CategoryButton(
             icon: Icons.science,
-            name: 'Science',
+            name: 'Science Quiz 1',
             iconColor: Colors.redAccent,
             creationDate: '01 Aug 2024',
             onTap: () {
@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CategoryButton(
             icon: Icons.public,
-            name: 'Geography',
+            name: 'Geography Quiz 1',
             iconColor: Colors.greenAccent,
             creationDate: '01 Aug 2024',
             onTap: () {
@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CategoryButton(
             icon: Icons.sports,
-            name: 'Sports',
+            name: 'Sports Quiz 1',
             iconColor: Colors.orangeAccent,
             creationDate: '01 Aug 2024',
             onTap: () {
@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CategoryButton(
             icon: Icons.biotech,
-            name: 'Biology',
+            name: 'Biology Quiz 1',
             iconColor: Colors.blueAccent,
             creationDate: '01 Aug 2024',
             onTap: () {

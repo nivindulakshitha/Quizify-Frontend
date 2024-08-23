@@ -4,6 +4,7 @@ import 'history_screen.dart'; // Import the HistoryScreen
 import 'add_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 import 'home_screen.dart'; // Import the HomeScreen
+import 'package:quizify/widgets/custom_app_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -39,22 +40,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF3366FF),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
+      appBar: CustomAppBar(
+        title: "Settings",
+        onBackPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
