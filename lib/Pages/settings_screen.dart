@@ -4,7 +4,9 @@ import 'history_screen.dart'; // Import the HistoryScreen
 import 'add_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 import 'home_screen.dart'; // Import the HomeScreen
-import 'package:quizify/widgets/custom_app_bar.dart';
+import 'aboutus_screen.dart'; // Import the AboutScreen
+import 'logout_screen.dart'; // Import the LogoutScreen
+import 'package:quizify/widgets/custom_app_bar.dart'; // Import the CustomAppBar widget
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -82,6 +84,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: 'About Us',
               onTap: () {
                 // Navigate to the About Us screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                );
               },
             ),
             _buildSettingsItem(
@@ -97,7 +103,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: Icons.logout,
               title: 'Logout',
               onTap: () {
-                // Handle logout action
+                // Navigate to the Logout screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogoutScreen()),
+                );
               },
             ),
           ],
@@ -109,7 +119,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildSettingsItem(BuildContext context, {required IconData icon, required String title, Widget? trailing, VoidCallback? onTap}) {
+  Widget _buildSettingsItem(BuildContext context,
+      {required IconData icon,
+      required String title,
+      Widget? trailing,
+      VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: Colors.black54),
       title: Text(
@@ -119,7 +133,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           color: Colors.black87,
         ),
       ),
-      trailing: trailing ?? Icon(Icons.arrow_forward_ios, color: Colors.black54),
+      trailing:
+          trailing ?? Icon(Icons.arrow_forward_ios, color: Colors.black54),
       onTap: onTap,
       contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       shape: RoundedRectangleBorder(

@@ -4,7 +4,7 @@ import 'history_screen.dart'; // Import the HistoryScreen
 import 'home_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 import 'settings_screen.dart'; // Import the SettingsScreen
-
+import 'package:quizify/widgets/custom_app_bar.dart'; // Import the CategoryButton widget
 
 class AddScreen extends StatefulWidget {
   @override
@@ -37,9 +37,11 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Add"),
-        backgroundColor: Color(0xFF3366FF),
+      appBar: CustomAppBar(
+        title: "Add Quizes",
+        onBackPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: Center(
         child: Text(
