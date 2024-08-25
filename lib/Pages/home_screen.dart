@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'create_quiz_screen.dart';
 import 'join_quiz_screen.dart';
@@ -99,7 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CreateQuizScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => CreateQuizScreen()),
                       );
                     },
                   ),
@@ -110,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => JoinQuizScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => JoinQuizScreen()),
                       );
                     },
                   ),
@@ -133,7 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AllQuizzesScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => AllQuizzesScreen()),
                         );
                       },
                       child: Text(
@@ -158,7 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildFeatureCard(BuildContext context, {required String title, required Color color, required Function onTap}) {
+  Widget _buildFeatureCard(BuildContext context,
+      {required String title, required Color color, required Function onTap}) {
     return GestureDetector(
       onTap: () => onTap(),
       child: Container(
