@@ -3,6 +3,7 @@ import 'dart:async';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
+  //Splash Screen
 
   @override
   Widget build(BuildContext context) {

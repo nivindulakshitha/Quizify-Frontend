@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:quizify/widgets/custom_bottom_nav_bar.dart'; // Import the CustomBottomNavBar widget
 import 'history_screen.dart'; // Import the HistoryScreen
-import 'add_screen.dart'; // Import the AddScreen
-import 'home_screen.dart'; // Import the ProfileScreen
+import 'home_screen.dart'; // Import the AddScreen
+import 'profile_screen.dart'; // Import the ProfileScreen
 import 'settings_screen.dart'; // Import the SettingsScreen
+import 'package:quizify/widgets/custom_app_bar.dart'; // Import the CategoryButton widget
 
-
-class ProfileScreen extends StatefulWidget {
+class AddScreen extends StatefulWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _AddScreenState createState() => _AddScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _AddScreenState extends State<AddScreen> {
   void _onTabSelected(int index) {
     Navigator.pushReplacement(
       context,
@@ -25,25 +25,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return HomeScreen();
       case 1:
         return HistoryScreen();
-      case 2:
-        return AddScreen();
+      case 3:
+        return ProfileScreen();
       case 4:
         return SettingsScreen();
       default:
-        return ProfileScreen();
+        return AddScreen();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        backgroundColor: Color(0xFF3366FF),
+      appBar: CustomAppBar(
+        title: "Add Quizes",
+        onBackPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: Center(
         child: Text(
-          "Profile Screen",
+          "Add Screen",
           style: TextStyle(fontSize: 24),
         ),
       ),
