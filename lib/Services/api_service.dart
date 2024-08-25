@@ -5,7 +5,8 @@ import 'dart:convert';
 Future<Map<String, dynamic>> postRequest(
     String endpoint, Map<String, dynamic> body) async {
   final url = Uri.parse('https://quizify-api.netlify.app/api/$endpoint');
-
+  print(body);
+  
   try {
     final response = await http.post(
       url,
@@ -15,7 +16,7 @@ Future<Map<String, dynamic>> postRequest(
       body: jsonEncode(body),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return jsonDecode(response.body);
     } else {
       return {
@@ -34,24 +35,24 @@ Future<Map<String, dynamic>> postRequest(
 
 // Function to make a GET request:nivindulakshitha
 Future<Map<String, dynamic>> getRequest(String endpoint) async {
-	final url = Uri.parse('https://quizify-api.netlify.app/api/$endpoint');
+  final url = Uri.parse('https://quizify-api.netlify.app/api/$endpoint');
 
-	try {
-		final response = await http.get(url);
+  try {
+    final response = await http.get(url);
 
-		if (response.statusCode == 200) {
-			return jsonDecode(response.body);
-		} else {
-			return {
-				'success': false,
-				'message': 'An error occurred while processing your request',
-			};
-		}
-	} catch (error) {
-		return {
-			'success': false,
-			'message': 'An error occurred while processing your request',
-			'error': error.toString(),
-		};
-	}
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return jsonDecode(response.body);
+    } else {
+      return {
+        'success': false,
+        'message': 'An error occurred while processing your request',
+      };
+    }
+  } catch (error) {
+    return {
+      'success': false,
+      'message': 'An error occurred while processing your request',
+      'error': error.toString(),
+    };
+  }
 }

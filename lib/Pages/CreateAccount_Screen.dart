@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:quizify/Services/api_service.dart';
 
 class CreateAccountScreen extends StatelessWidget {
+
+	// Text Editing Controllers for the Text Fields:nivindulakshitha
+	final TextEditingController usernameController = TextEditingController();
+	final TextEditingController emailController = TextEditingController();
+	final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +40,7 @@ class CreateAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   TextField(
+						controller: usernameController, // Controller for the Username TextField:nivindulakshitha
                     decoration: InputDecoration(
                       labelText: "User Name",
                       hintText: "User",
@@ -43,6 +51,7 @@ class CreateAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   TextField(
+					controller: emailController, // Controller for the Email TextField:nivindulakshitha
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "xxx@gmail.com",
@@ -53,6 +62,7 @@ class CreateAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 15),
                   TextField(
+					controller: passwordController, // Controller for the Password TextField:nivindulakshitha
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -64,9 +74,19 @@ class CreateAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+						try {
+							Map<String, dynamic> response = await postRequest('user/register', {
+								'username': usernameController.text,
+								'email': emailController.text,
+								'password': passwordController.text,
+							});
 
-                    },
+							print('postRequest response: $response');
+						} catch (error) {
+							print('postRequest error: $error');
+						}
+					},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF3366FF), // Button color
                       shape: RoundedRectangleBorder(
