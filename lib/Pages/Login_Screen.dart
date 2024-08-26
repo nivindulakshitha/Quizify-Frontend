@@ -7,15 +7,15 @@ import 'package:quizify/Models/user_provider.dart'; // Import the UserProvider
 
 class LoginScreen extends StatelessWidget {
   // Text Editing Controllers for the Text Fields:nivindulakshitha
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3366FF),
+      backgroundColor: const Color(0xFF3366FF),
       body: GestureDetector(
         onTap: () {
           // Dismiss the keyboard when tapping outside of text fields
@@ -102,9 +102,10 @@ class LoginScreen extends StatelessWidget {
                         });
 
                         if (response['success']) {
-
-							UserModel user = UserModel.fromJson(response['data']);
-							await Provider.of<UserProvider>(context, listen: false).saveUserToPrefs(user);
+                          UserModel user = UserModel.fromJson(response['data']);
+                          await Provider.of<UserProvider>(context,
+                                  listen: false)
+                              .saveUserToPrefs(user);
 
                           // Display a success message to the user
                           Navigator.pushReplacement(
@@ -122,6 +123,7 @@ class LoginScreen extends StatelessWidget {
                           );
                         }
                       } catch (error) {
+						print('Error: $error');
                         // Display an error message to the user
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

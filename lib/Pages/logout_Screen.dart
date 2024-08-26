@@ -39,7 +39,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
               SizedBox(height: 24.0),
               ElevatedButton(
                 onPressed: () {
-                  // No action for now
+                  Navigator.pushReplacementNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
