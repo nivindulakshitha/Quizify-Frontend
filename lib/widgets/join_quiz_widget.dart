@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizify/Services/api_service.dart';
 
 class JoinQuizWidget extends StatelessWidget {
   final TextEditingController _quizIdController = TextEditingController();
@@ -38,7 +39,33 @@ class JoinQuizWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: onJoinQuiz,
+              onPressed: () async {
+                Map<String, dynamic> response =
+                    await getRequest('quiz/take/${quizId}');
+
+                if (response['success']) {
+                  Map<String, dynamic> response =
+                      await postRequest('quiz/match-passwords', {
+                    'quizId': quizId,
+                    'password': quizPassword,
+                  });
+
+                  if (response['success']) {
+                    onJoinQuiz();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content:
+                              Text('Invalid password for the given quiz ID')),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('No quiz found with the given ID')),
+                  );
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 padding: const EdgeInsets.symmetric(vertical: 16),
