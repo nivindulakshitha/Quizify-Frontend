@@ -14,16 +14,16 @@ class UserProvider with ChangeNotifier {
 
   Future<void> saveUserToPrefs(UserModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userId', user.id);
-    await prefs.setString('userName', user.username);
-    await prefs.setString('userEmail', user.email);
+    await prefs.setString('userid', user.id);
+    await prefs.setString('username', user.username);
+    await prefs.setString('useremail', user.email);
   }
 
   Future<void> loadUserFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('userId');
-    String? email = prefs.getString('userEmail');
-    String? name = prefs.getString('userName');
+    String? userId = prefs.getString('userid');
+    String? email = prefs.getString('useremail');
+    String? name = prefs.getString('username');
 
     if (userId != null && email != null && name != null) {
       _user = UserModel(id: userId, email: email, username: name);

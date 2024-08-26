@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
+import 'package:quizify/Models/user_model.dart';
 import 'create_quiz_screen.dart';
 import 'join_quiz_screen.dart';
 import 'package:quizify/Quiz_Screens/science_quiz_screen.dart'; // Import the ScienceQuizScreen
@@ -15,6 +16,9 @@ import 'history_screen.dart'; // Import the HistoryScreen
 import 'add_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 import 'settings_screen.dart'; // Import the SettingsScreen
+
+import 'package:provider/provider.dart';
+import 'package:quizify/Models/user_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,6 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if the user is logged in
+    UserModel? user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       backgroundColor: const Color(0xFF3366FF),
       body: SafeArea(
@@ -84,14 +91,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              const Text(
-                'Nadun Daluwatta',
-                style: TextStyle(
+              Text(
+                '${user?.username}',
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-              ),
+              ), 
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -206,7 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ScienceQuizScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const ScienceQuizScreen()),
               );
             },
           ),
@@ -218,7 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const GeographyQuizScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const GeographyQuizScreen()),
               );
             },
           ),
@@ -230,7 +239,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SportsQuizScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const SportsQuizScreen()),
               );
             },
           ),
@@ -242,7 +252,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BiologyQuizScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const BiologyQuizScreen()),
               );
             },
           ),

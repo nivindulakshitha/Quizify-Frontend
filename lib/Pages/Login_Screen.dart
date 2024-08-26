@@ -103,6 +103,7 @@ class LoginScreen extends StatelessWidget {
 
                         if (response['success']) {
                           UserModel user = UserModel.fromJson(response['data']);
+                          Provider.of<UserProvider>(context, listen: false).setUser(user);
                           await Provider.of<UserProvider>(context,
                                   listen: false)
                               .saveUserToPrefs(user);
