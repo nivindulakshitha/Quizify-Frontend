@@ -4,9 +4,18 @@ import 'package:quizify/Pages/Login_Screen.dart';
 import 'package:quizify/Pages/CreateAccount_Screen.dart';
 import 'package:quizify/Pages/ForgotPassword_Screen.dart';
 import 'package:quizify/Pages/CheckEmail_Screen.dart';
+import 'package:provider/provider.dart';
+import 'package:quizify/Models/user_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

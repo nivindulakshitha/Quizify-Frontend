@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart'; // Import the HomeScreen
 import 'package:quizify/Services/api_service.dart'; // Import the API service
+import 'package:provider/provider.dart'; // Import the Provider package
+import 'package:quizify/Models/user_model.dart';
+import 'package:quizify/Models/user_provider.dart'; // Import the UserProvider
 
 class LoginScreen extends StatelessWidget {
   // Text Editing Controllers for the Text Fields:nivindulakshitha
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,8 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(25),
               ),
-              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -66,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("You forgot your password  "),
+                      const Text("You forgot your password"),
                       GestureDetector(
                         onTap: () {
                           // Navigate to the Forgot Password screen
@@ -85,8 +91,8 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
-						// * I used the same SnackBar for both success and error messages, do modifications as needed
-						// Send a POST request to the API to log in the user
+                      // * I used the same SnackBar for both success and error messages, do modifications as needed
+                      // Send a POST request to the API to log in the user
 
                       try {
                         Map<String, dynamic> response =
@@ -96,6 +102,10 @@ class LoginScreen extends StatelessWidget {
                         });
 
                         if (response['success']) {
+
+							UserModel user = UserModel.fromJson(response['data']);
+							await Provider.of<UserProvider>(context, listen: false).saveUserToPrefs(user);
+
                           // Display a success message to the user
                           Navigator.pushReplacement(
                             context,
@@ -103,19 +113,20 @@ class LoginScreen extends StatelessWidget {
                                 builder: (context) => HomeScreen()),
                           );
                         } else {
-							// Display an error message to the user
-							ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Invalid email or password"),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-						}
+                          // Display an error message to the user
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Invalid email or password"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       } catch (error) {
                         // Display an error message to the user
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("An error occurred while processing your request"),
+                            content: Text(
+                                "An error occurred while processing your request"),
                             backgroundColor: Colors.red,
                           ),
                         );
