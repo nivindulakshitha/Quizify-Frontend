@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizify/widgets/create_quiz_widget.dart'; // Import the create_quiz_widget
+import 'package:provider/provider.dart';
+import 'package:quizify/Models/quiz_provider.dart';
+import 'package:quizify/widgets/create_quiz_widget.dart';
 
 class CreateQuizScreen extends StatefulWidget {
   const CreateQuizScreen({super.key});
@@ -13,6 +15,8 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
   int _quizDuration = 5;
   String _selectedQuizType = 'Open quiz';
   bool _isPrivateQuiz = false;
+  final TextEditingController _quizNameController = TextEditingController();
+  final TextEditingController _quizPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +39,12 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             children: [
               _buildDropdownMenu(),
               const SizedBox(height: 16),
-              if (_isPrivateQuiz) _buildEditableTextBox(context, 'Quiz Password:', '123456'),
+              if (_isPrivateQuiz)
+                _buildEditableTextBox(context, 'Quiz Password:', '123456',
+                    controller: _quizPasswordController),
               const SizedBox(height: 16),
-              _buildEditableTextBox(context, 'Quiz Name', 'XYZ Quiz 1'),
+              _buildEditableTextBox(context, 'Quiz Name', 'XYZ Quiz 1',
+                  controller: _quizNameController),
               const SizedBox(height: 16),
               _buildNumberSelector(
                 context,
@@ -128,7 +135,9 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
     );
   }
 
-  Widget _buildEditableTextBox(BuildContext context, String label, String initialValue) {
+  Widget _buildEditableTextBox(
+      BuildContext context, String label, String initialValue,
+      {required TextEditingController controller}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -153,6 +162,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             ),
           ),
           TextField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: initialValue,
               border: InputBorder.none,
@@ -165,8 +175,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
     );
   }
 
-  Widget _buildNumberSelector(
-      BuildContext context, String label, int value,
+  Widget _buildNumberSelector(BuildContext context, String label, int value,
       {required VoidCallback onIncrement, required VoidCallback onDecrement}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -222,6 +231,17 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
+          // Initialize QuizProvider with the data
+          final quizProvider =
+              Provider.of<QuizProvider>(context, listen: false);
+          quizProvider.setType(_isPrivateQuiz ? 'close' : 'open');
+          quizProvider.setName(_quizNameController.text);
+          if (_isPrivateQuiz) {
+            quizProvider.setPassword(_quizPasswordController.text);
+          }
+          quizProvider.setDuration(_quizDuration * 60);
+
+          // Navigate to the question creation screen
           _navigateToFirstQuestion(context);
         },
         style: ElevatedButton.styleFrom(

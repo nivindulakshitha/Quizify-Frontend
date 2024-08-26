@@ -6,12 +6,14 @@ import 'package:quizify/Pages/ForgotPassword_Screen.dart';
 import 'package:quizify/Pages/CheckEmail_Screen.dart';
 import 'package:provider/provider.dart';
 import 'package:quizify/Models/user_provider.dart';
+import 'package:quizify/Models/quiz_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => QuizProvider()),
       ],
       child: const MyApp(),
     ),

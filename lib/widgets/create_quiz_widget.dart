@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quizify/Models/quiz_model.dart';
+import 'package:quizify/Models/quiz_provider.dart';
 
 class CreateQuizWidget extends StatelessWidget {
   final int questionNumber;
   final int totalQuestions;
 
-  CreateQuizWidget({super.key, required this.questionNumber, required this.totalQuestions});
+  CreateQuizWidget(
+      {super.key, required this.questionNumber, required this.totalQuestions});
 
-  final _answerControllers = List.generate(4, (index) => TextEditingController());
+  final _answerControllers =
+      List.generate(4, (index) => TextEditingController());
+  final TextEditingController questionController = TextEditingController();
+  final TextEditingController correctAnswerController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final quizProvider = Provider.of<QuizProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -40,12 +49,13 @@ class CreateQuizWidget extends StatelessWidget {
               color: Colors.blue,
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              decoration: const InputDecoration(
                 labelText: 'Quiz Question',
                 hintText: 'Enter your question here',
                 border: OutlineInputBorder(),
               ),
+              controller: questionController,
             ),
             const SizedBox(height: 16),
             const Text(
@@ -77,10 +87,35 @@ class CreateQuizWidget extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (questionNumber == totalQuestions) {
-                    _showShareQuizDialog(context);
+                    Map<String, dynamic> response = await
+                        quizProvider.submitQuiz();
+
+                    print('${response}');
+
+                    if (response['success']) {
+                      _showShareQuizDialog(context);
+                    }
                   } else {
+                    quizProvider.addQuestion(Question(
+                        questionText: questionController.text,
+                        options: [
+                          Option(
+                              number: 0,
+                              optionText: _answerControllers[0].text),
+                          Option(
+                              number: 1,
+                              optionText: _answerControllers[1].text),
+                          Option(
+                              number: 2,
+                              optionText: _answerControllers[2].text),
+                          Option(
+                              number: 3, optionText: _answerControllers[3].text)
+                        ],
+                        correctOptionIndex: _getCorrectOptionIndex(
+                            _answerControllers, correctAnswerController)));
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -97,7 +132,8 @@ class CreateQuizWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(fontSize: 16),
                 ),
-                child: Text(questionNumber == totalQuestions ? 'All done' : 'Next'),
+                child: Text(
+                    questionNumber == totalQuestions ? 'All done' : 'Next'),
               ),
             ),
           ],
@@ -140,6 +176,31 @@ class CreateQuizWidget extends StatelessWidget {
       }).toList(),
       onChanged: (newValue) {
         // Handle the correct answer selection
+        switch (newValue) {
+          case 'A':
+            {
+              correctAnswerController.text = _answerControllers[0].text;
+              break;
+            }
+
+          case 'B':
+            {
+              correctAnswerController.text = _answerControllers[1].text;
+              break;
+            }
+
+          case 'C':
+            {
+              correctAnswerController.text = _answerControllers[2].text;
+              break;
+            }
+
+          case 'D':
+            {
+              correctAnswerController.text = _answerControllers[3].text;
+              break;
+            }
+        }
       },
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
@@ -162,13 +223,26 @@ class CreateQuizWidget extends StatelessWidget {
   }
 }
 
+int _getCorrectOptionIndex(
+  dynamic answerControllers,
+  dynamic correctAnswerController,
+) {
+  for (int index = 0; index < answerControllers.length; index++) {
+    if (correctAnswerController.text == answerControllers[index].text) {
+      return index;
+    }
+  }
+  return -1;
+}
+
 class ShareQuizDialog extends StatelessWidget {
   final String quizName;
   final String quizId;
   final String password;
   final String inviteLink;
 
-  const ShareQuizDialog({super.key, 
+  const ShareQuizDialog({
+    super.key,
     required this.quizName,
     required this.quizId,
     required this.password,
@@ -225,7 +299,8 @@ class ShareQuizDialog extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                 textStyle: const TextStyle(
                   fontSize: 16,
                 ),
@@ -241,7 +316,8 @@ class ShareQuizDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(String label, String value, {bool isPassword = false, bool isLink = false}) {
+  Widget _buildInfoRow(String label, String value,
+      {bool isPassword = false, bool isLink = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -259,13 +335,12 @@ class ShareQuizDialog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: isLink ? Colors.blue : Colors.black,
-                decoration: isLink ? TextDecoration.underline : TextDecoration.none,
+                decoration:
+                    isLink ? TextDecoration.underline : TextDecoration.none,
               ),
             ),
-            if (isPassword)
-              const SizedBox(width: 4),
-            if (isPassword)
-              const Icon(Icons.visibility, size: 16),
+            if (isPassword) const SizedBox(width: 4),
+            if (isPassword) const Icon(Icons.visibility, size: 16),
           ],
         ),
       ],
