@@ -4,6 +4,7 @@ import 'package:quizify/Services/api_service.dart';
 
 class QuizProvider with ChangeNotifier {
   final QuizModel _quiz = QuizModel(
+    ownerId: '',
     quizType: '',
     name: '',
     password: '',
@@ -12,6 +13,11 @@ class QuizProvider with ChangeNotifier {
   );
 
   QuizModel get quiz => _quiz;
+
+  void setOwnerId(String ownerId) {
+    _quiz.ownerId = ownerId;
+    notifyListeners();
+  }
 
   void setType(String type) {
     _quiz.quizType = type;
@@ -40,6 +46,7 @@ class QuizProvider with ChangeNotifier {
 
   Future<Map<String, dynamic>> submitQuiz() async {
     final response = await postRequest('quiz/create', {
+      'ownerId': quiz.ownerId,
       'quizType': quiz.quizType,
         'name': quiz.name,
         'password': quiz.password,

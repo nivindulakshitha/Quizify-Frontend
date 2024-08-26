@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizify/Models/quiz_model.dart';
 import 'package:quizify/Models/quiz_provider.dart';
+import 'package:quizify/Models/user_model.dart';
+import 'package:quizify/Models/user_provider.dart';
 
 class CreateQuizWidget extends StatelessWidget {
   final int questionNumber;
@@ -18,6 +20,7 @@ class CreateQuizWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<QuizProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -89,15 +92,34 @@ class CreateQuizWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   if (questionNumber == totalQuestions) {
+
+                    quizProvider.setOwnerId(userProvider.user!.id);
+
                     Map<String, dynamic> response = await
                         quizProvider.submitQuiz();
 
                     if (response['success']) {
                       var data = response['data'];
-                      print(data['name']);
+
                       _showShareQuizDialog(context, data['name'], data['_id'], quizProvider.quiz.password, data['link']);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(response['message']),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    } else {
+                      print(response['error']);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(response['message']),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
                     }
                   } else {
+                    // TODO: Add validation for empty fields
                     quizProvider.addQuestion(Question(
                         questionText: questionController.text,
                         options: [

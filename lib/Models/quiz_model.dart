@@ -1,11 +1,13 @@
 class QuizModel {
   String quizType;
+  String ownerId;
   String name;
   String password;
   int duration;
   List<Question> questions;
 
   QuizModel({
+    required this.ownerId,
     required this.quizType,
     required this.name,
     required this.password,
