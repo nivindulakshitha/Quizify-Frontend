@@ -7,6 +7,11 @@ import 'settings_screen.dart'; // Import the SettingsScreen
 import 'package:quizify/widgets/custom_app_bar.dart'; // Import the custom app bar
 import '../widgets/category_button.dart'; // Import the CategoryButton widget
 
+// Import the Provider package:nivindulakshitha
+import 'package:provider/provider.dart';
+import 'package:quizify/Models/user_provider.dart';
+import 'package:quizify/Models/user_model.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -39,6 +44,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    // Get the user model:nivindulakshitha
+    UserModel? user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       appBar: CustomAppBar(
         title: "User Account",
@@ -72,21 +81,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         AssetImage('assets/user.png'), // Demo image
                   ),
                   const SizedBox(width: 16.0),
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Nadun Daluwatta",
-                        style: TextStyle(
+                         '${user?.username}',
+                        style: const TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 4.0),
+                      const SizedBox(height: 4.0),
                       Text(
-                        "nadun_dalu2011",
-                        style: TextStyle(
+                        '${user?.id}',
+                        style: const TextStyle(
                           fontSize: 14.0,
                           color: Colors.black54,
                         ),

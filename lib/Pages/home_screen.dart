@@ -17,6 +17,7 @@ import 'add_screen.dart'; // Import the AddScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 import 'settings_screen.dart'; // Import the SettingsScreen
 
+// Import the Provider package:nivindulakshitha
 import 'package:provider/provider.dart';
 import 'package:quizify/Models/user_provider.dart';
 
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Check if the user is logged in
+    // Get the user model:nivindulakshitha
     UserModel? user = Provider.of<UserProvider>(context).user;
 
     return Scaffold(
@@ -92,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Text(
+				// Display the username:nivindulakshitha
                 '${user?.username}',
                 style: const TextStyle(
                   fontSize: 28,
