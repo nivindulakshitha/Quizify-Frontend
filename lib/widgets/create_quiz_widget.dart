@@ -92,10 +92,10 @@ class CreateQuizWidget extends StatelessWidget {
                     Map<String, dynamic> response = await
                         quizProvider.submitQuiz();
 
-                    print('${response}');
-
                     if (response['success']) {
-                      _showShareQuizDialog(context);
+                      var data = response['data'];
+                      print(data['name']);
+                      _showShareQuizDialog(context, data['name'], data['_id'], quizProvider.quiz.password, data['link']);
                     }
                   } else {
                     quizProvider.addQuestion(Question(
@@ -208,15 +208,16 @@ class CreateQuizWidget extends StatelessWidget {
     );
   }
 
-  void _showShareQuizDialog(BuildContext context) {
+  void _showShareQuizDialog(BuildContext context, dynamic name, dynamic id, dynamic password, dynamic link) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const ShareQuizDialog(
-          quizName: 'XYZ Quiz', // Replace with actual quiz name
-          quizId: '858 888 584', // Replace with actual quiz ID
-          password: '123456', // Replace with actual quiz password
-          inviteLink: 'quiz.com/sci6', // Replace with actual invite link
+        return ShareQuizDialog(
+          quizName: name,
+            quizId: id.replaceAllMapped(RegExp(r'\d{3}'), (match) => '${match.group(0)} ').trim(),
+          password: password,
+          // TODO: Invite link cannot be placed within the dialog, it should be shared via the share button
+          inviteLink: link,
         );
       },
     );
