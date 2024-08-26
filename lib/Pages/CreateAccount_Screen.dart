@@ -79,15 +79,16 @@ class CreateAccountScreen extends StatelessWidget {
                   const SizedBox(height: 25),
                   ElevatedButton(
                     onPressed: () async {
+						// TODO: Form data validation should be done here
+						
 						try {
+							// * I used the same SnackBar for both success and error messages, do modifications as needed
 							// Make a POST request to the API:nivindulakshitha
 							Map<String, dynamic> response = await postRequest('user/register', {
 								'username': usernameController.text,
 								'email': emailController.text,
 								'password': passwordController.text,
 							});
-
-							print(response);
 
 							if (response['success']) {
 								// Show a SnackBar with a success message
