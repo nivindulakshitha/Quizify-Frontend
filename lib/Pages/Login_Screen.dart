@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart'; // Import the HomeScreen
+import 'package:quizify/Services/api_service.dart'; // Import the API service
 
 class LoginScreen extends StatelessWidget {
+  // Text Editing Controllers for the Text Fields:nivindulakshitha
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Welcome Back",
                     style: TextStyle(
                       fontSize: 35,
@@ -32,8 +37,10 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0xFF3366FF),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextField(
+                    controller:
+                        emailController, // Controller for the Email TextField:nivindulakshitha
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "xxx@gmail.com",
@@ -42,8 +49,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   TextField(
+                    controller:
+                        passwordController, // Controller for the Password TextField:nivindulakshitha
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -53,17 +62,17 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("You forgot your password  "),
+                      const Text("You forgot your password  "),
                       GestureDetector(
                         onTap: () {
                           // Navigate to the Forgot Password screen
                           Navigator.pushNamed(context, '/forgotPassword');
                         },
-                        child: Text(
+                        child: const Text(
                           "Forgot password",
                           style: TextStyle(
                             color: Color(0xFF3366FF),
@@ -73,24 +82,54 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the HomeScreen when login button is pressed
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                    onPressed: () async {
+						// * I used the same SnackBar for both success and error messages, do modifications as needed
+						// Send a POST request to the API to log in the user
+
+                      try {
+                        Map<String, dynamic> response =
+                            await postRequest('user/login', {
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                        });
+
+                        if (response['success']) {
+                          // Display a success message to the user
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
+                          );
+                        } else {
+							// Display an error message to the user
+							ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Invalid email or password"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+						}
+                      } catch (error) {
+                        // Display an error message to the user
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("An error occurred while processing your request"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF3366FF), // Button color
+                      backgroundColor: const Color(0xFF3366FF), // Button color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 124, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 124, vertical: 15),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(
                         fontSize: 18,
@@ -98,9 +137,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text("Or, Login with Social Media"),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 20),
+                  const Text("Or, Login with Social Media"),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -113,11 +152,11 @@ class LoginScreen extends StatelessWidget {
                           },
                           icon: Image.asset('assets/google.png'),
                           iconSize: 50,
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           splashRadius: 30,
                         ),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       SizedBox(
                         height: 60,
                         width: 60,
@@ -127,23 +166,23 @@ class LoginScreen extends StatelessWidget {
                           },
                           icon: Image.asset('assets/Facebook.png'),
                           iconSize: 50,
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           splashRadius: 30,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("You didn’t have an account yet? "),
+                      const Text("You didn’t have an account yet? "),
                       GestureDetector(
                         onTap: () {
                           // Navigate to the Create Account screen
                           Navigator.pushNamed(context, '/createAccount');
                         },
-                        child: Text(
+                        child: const Text(
                           "Sign up",
                           style: TextStyle(
                             color: Color(0xFF3366FF),

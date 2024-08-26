@@ -4,9 +4,10 @@ import 'dart:convert';
 // Function to make a POST request:nivindulakshitha
 Future<Map<String, dynamic>> postRequest(
     String endpoint, Map<String, dynamic> body) async {
+  print('postRequest $endpoint $body');
+
   final url = Uri.parse('https://quizify-api.netlify.app/api/$endpoint');
-  print(body);
-  
+
   try {
     final response = await http.post(
       url,
@@ -17,6 +18,7 @@ Future<Map<String, dynamic>> postRequest(
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      print('postRequest response: ${response.body}');
       return jsonDecode(response.body);
     } else {
       return {
@@ -35,12 +37,15 @@ Future<Map<String, dynamic>> postRequest(
 
 // Function to make a GET request:nivindulakshitha
 Future<Map<String, dynamic>> getRequest(String endpoint) async {
+  print('getRequest $endpoint');
+
   final url = Uri.parse('https://quizify-api.netlify.app/api/$endpoint');
 
   try {
     final response = await http.get(url);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+    print('getRequest response: ${response.body}');
       return jsonDecode(response.body);
     } else {
       return {
