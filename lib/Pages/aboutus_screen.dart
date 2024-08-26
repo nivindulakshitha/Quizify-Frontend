@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quizify/widgets/custom_bottom_nav_bar.dart'; // Import the CustomBottomNavBar widget
 import 'history_screen.dart'; // Import the HistoryScreen
 import 'home_screen.dart'; // Import the HomeScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
