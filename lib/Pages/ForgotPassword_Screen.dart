@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:quizify/Services/api_service.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+
     return Scaffold(
       backgroundColor: const Color(0xFF3366FF),
       body: GestureDetector(
@@ -40,6 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "xxx@gmail.com",
@@ -53,9 +57,33 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 25),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // Navigate to the CheckEmail screen
-                      Navigator.pushNamed(context, '/checkEmail');
+
+                      Map<String, dynamic> response = await postRequest(
+                          'user/forgot-password',
+                          {'email': emailController.text});
+                        
+                      if (response['success']) {
+                        Navigator.pushNamed(context, '/checkEmail');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '${response['message']}',
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              response['error']['message']
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF3366FF), // Button color
@@ -75,9 +103,31 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context,
-                          '/login'); // Navigate back to the login screen
+                    onPressed: () async {
+                      Map<String, dynamic> response = await postRequest(
+                          'user/forgot-password',
+                          {'email': emailController.text});
+                        
+                      if (response['success']) {
+                        Navigator.pushNamed(context, '/checkEmail');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '${response['message']}',
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              response['error']['message']
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF36A7FF), // Button color

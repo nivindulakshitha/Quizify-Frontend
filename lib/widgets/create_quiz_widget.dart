@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizify/Models/quiz_model.dart';
 import 'package:quizify/Models/quiz_provider.dart';
-import 'package:quizify/Models/user_model.dart';
 import 'package:quizify/Models/user_provider.dart';
 
 class CreateQuizWidget extends StatelessWidget {

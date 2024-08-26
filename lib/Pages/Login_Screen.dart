@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("You forgot your password"),
+                      const Text("You forgot your password? "),
                       GestureDetector(
                         onTap: () {
                           // Navigate to the Forgot Password screen

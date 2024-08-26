@@ -24,7 +24,7 @@ Future<Map<String, dynamic>> postRequest(
       return {
         'success': false,
         'message': 'An error occurred while processing your request',
-        'error': response.body
+        'error': jsonDecode(response.body)
       };
     }
   } catch (error) {
@@ -52,7 +52,7 @@ Future<Map<String, dynamic>> getRequest(String endpoint) async {
       return {
         'success': false,
         'message': 'An error occurred while processing your request',
-        'error': response.body
+        'error': jsonDecode(response.body)
       };
     }
   } catch (error) {
