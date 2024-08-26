@@ -7,6 +7,8 @@ import 'settings_screen.dart'; // Import the SettingsScreen
 import 'package:quizify/widgets/custom_app_bar.dart'; // Import the CategoryButton widget
 
 class AddScreen extends StatefulWidget {
+  const AddScreen({super.key});
+
   @override
   _AddScreenState createState() => _AddScreenState();
 }
@@ -22,15 +24,15 @@ class _AddScreenState extends State<AddScreen> {
   Widget _getScreenFromIndex(int index) {
     switch (index) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 1:
-        return HistoryScreen();
+        return const HistoryScreen();
       case 3:
-        return ProfileScreen();
+        return const ProfileScreen();
       case 4:
-        return SettingsScreen();
+        return const SettingsScreen();
       default:
-        return AddScreen();
+        return const AddScreen();
     }
   }
 
@@ -43,7 +45,7 @@ class _AddScreenState extends State<AddScreen> {
           Navigator.of(context).pop();
         },
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           "Add Screen",
           style: TextStyle(fontSize: 24),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'settings_screen.dart'; // Import the SettingsScreen
 
 class LogoutScreen extends StatefulWidget {
+  const LogoutScreen({super.key});
+
   @override
   _LogoutScreenState createState() => _LogoutScreenState();
 }
@@ -10,14 +12,14 @@ class _LogoutScreenState extends State<LogoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3366FF),
+      backgroundColor: const Color(0xFF3366FF),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24.0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black26,
                 blurRadius: 10.0,
@@ -28,7 +30,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "Do you want Logout Now?",
                 style: TextStyle(
                   fontSize: 18.0,
@@ -36,7 +38,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                   color: Colors.black87,
                 ),
               ),
-              SizedBox(height: 24.0),
+              const SizedBox(height: 24.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/login');
@@ -44,12 +46,12 @@ class _LogoutScreenState extends State<LogoutScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                      const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Yes, Logout Now",
                   style: TextStyle(
                     fontSize: 16.0,
@@ -57,24 +59,24 @@ class _LogoutScreenState extends State<LogoutScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               ElevatedButton(
                 onPressed: () {
                   // Navigate back to the SettingsScreen
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                    MaterialPageRoute(builder: (context) => const SettingsScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 61.0, vertical: 12.0),
+                      const EdgeInsets.symmetric(horizontal: 61.0, vertical: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Cancel",
                   style: TextStyle(
                     fontSize: 16.0,

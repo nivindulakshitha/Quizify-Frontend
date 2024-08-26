@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SportsQuizScreen extends StatelessWidget {
+  const SportsQuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sports Quiz"),
-        backgroundColor: Color(0xFF3366FF),
+        title: const Text("Sports Quiz"),
+        backgroundColor: const Color(0xFF3366FF),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           "Sports Quiz Screen",
           style: TextStyle(fontSize: 24),

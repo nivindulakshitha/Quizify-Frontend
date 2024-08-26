@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizify/widgets/create_quiz_widget.dart'; // Import the create_quiz_widget
 
 class CreateQuizScreen extends StatefulWidget {
+  const CreateQuizScreen({super.key});
+
   @override
   _CreateQuizScreenState createState() => _CreateQuizScreenState();
 }
@@ -16,10 +18,10 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Quiz'),
+        title: const Text('Create Quiz'),
         backgroundColor: Colors.blue,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -32,11 +34,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildDropdownMenu(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               if (_isPrivateQuiz) _buildEditableTextBox(context, 'Quiz Password:', '123456'),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildEditableTextBox(context, 'Quiz Name', 'XYZ Quiz 1'),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildNumberSelector(
                 context,
                 'Number of Questions',
@@ -54,7 +56,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                   });
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildNumberSelector(
                 context,
                 'Quiz Duration (Minutes)',
@@ -72,7 +74,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                   });
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildCreateQuizButton(context, 'Create Quiz'),
             ],
           ),
@@ -83,11 +85,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
 
   Widget _buildDropdownMenu() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 4,
@@ -98,7 +100,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Select quiz type',
             style: TextStyle(
               fontSize: 14,
@@ -128,11 +130,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
 
   Widget _buildEditableTextBox(BuildContext context, String label, String initialValue) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 4,
@@ -145,7 +147,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: Colors.black54,
             ),
@@ -154,9 +156,9 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             decoration: InputDecoration(
               hintText: initialValue,
               border: InputBorder.none,
-              hintStyle: TextStyle(fontSize: 18),
+              hintStyle: const TextStyle(fontSize: 18),
             ),
-            style: TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 18),
           ),
         ],
       ),
@@ -167,11 +169,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
       BuildContext context, String label, int value,
       {required VoidCallback onIncrement, required VoidCallback onDecrement}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 4,
@@ -187,25 +189,25 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black54,
                 ),
               ),
               Text(
                 value.toString(),
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ],
           ),
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_drop_down),
+                icon: const Icon(Icons.arrow_drop_down),
                 onPressed: onDecrement,
               ),
               IconButton(
-                icon: Icon(Icons.arrow_drop_up),
+                icon: const Icon(Icons.arrow_drop_up),
                 onPressed: onIncrement,
               ),
             ],
@@ -222,18 +224,18 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
         onPressed: () {
           _navigateToFirstQuestion(context);
         },
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

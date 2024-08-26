@@ -4,7 +4,7 @@ class CreateQuizWidget extends StatelessWidget {
   final int questionNumber;
   final int totalQuestions;
 
-  CreateQuizWidget({required this.questionNumber, required this.totalQuestions});
+  CreateQuizWidget({super.key, required this.questionNumber, required this.totalQuestions});
 
   final _answerControllers = List.generate(4, (index) => TextEditingController());
 
@@ -13,12 +13,12 @@ class CreateQuizWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Create Quiz'),
+        title: const Text('Create Quiz'),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -28,52 +28,52 @@ class CreateQuizWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               'Question $questionNumber',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             LinearProgressIndicator(
               value: questionNumber / totalQuestions,
               backgroundColor: Colors.grey[300],
               color: Colors.blue,
             ),
-            SizedBox(height: 16),
-            TextField(
+            const SizedBox(height: 16),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Quiz Question',
                 hintText: 'Enter your question here',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Quiz Answers',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildAnswerField('A', _answerControllers[0]),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildAnswerField('B', _answerControllers[1]),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildAnswerField('C', _answerControllers[2]),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildAnswerField('D', _answerControllers[3]),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Correct Answer',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildCorrectAnswerDropdown(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -92,12 +92,12 @@ class CreateQuizWidget extends StatelessWidget {
                     );
                   }
                 },
-                child: Text(questionNumber == totalQuestions ? 'All done' : 'Next'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  textStyle: TextStyle(fontSize: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
+                child: Text(questionNumber == totalQuestions ? 'All done' : 'Next'),
               ),
             ),
           ],
@@ -111,18 +111,18 @@ class CreateQuizWidget extends StatelessWidget {
       children: [
         Text(
           '$label.',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Expanded(
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Enter answer $label',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
         ),
@@ -141,7 +141,7 @@ class CreateQuizWidget extends StatelessWidget {
       onChanged: (newValue) {
         // Handle the correct answer selection
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         border: OutlineInputBorder(),
       ),
     );
@@ -151,7 +151,7 @@ class CreateQuizWidget extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ShareQuizDialog(
+        return const ShareQuizDialog(
           quizName: 'XYZ Quiz', // Replace with actual quiz name
           quizId: '858 888 584', // Replace with actual quiz ID
           password: '123456', // Replace with actual quiz password
@@ -168,7 +168,7 @@ class ShareQuizDialog extends StatelessWidget {
   final String password;
   final String inviteLink;
 
-  ShareQuizDialog({
+  const ShareQuizDialog({super.key, 
     required this.quizName,
     required this.quizId,
     required this.password,
@@ -186,16 +186,16 @@ class ShareQuizDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'Share Your Quiz',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(10),
@@ -203,7 +203,7 @@ class ShareQuizDialog extends StatelessWidget {
               child: Center(
                 child: Text(
                   quizName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -211,29 +211,29 @@ class ShareQuizDialog extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildInfoRow('Quiz ID', quizId),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildInfoRow('Password', password, isPassword: true),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildInfoRow('Invite Link', inviteLink, isLink: true),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
                 // Handle share action here
                 Navigator.pop(context);
               },
-              child: Text('Share Links'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                textStyle: TextStyle(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                textStyle: const TextStyle(
                   fontSize: 16,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              child: const Text('Share Links'),
             ),
           ],
         ),
@@ -247,7 +247,7 @@ class ShareQuizDialog extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -263,9 +263,9 @@ class ShareQuizDialog extends StatelessWidget {
               ),
             ),
             if (isPassword)
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
             if (isPassword)
-              Icon(Icons.visibility, size: 16),
+              const Icon(Icons.visibility, size: 16),
           ],
         ),
       ],

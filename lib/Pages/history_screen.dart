@@ -8,6 +8,8 @@ import 'settings_screen.dart'; // Import the SettingsScreen
 import 'package:quizify/widgets/custom_app_bar.dart';
 
 class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({super.key});
+
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }
@@ -23,22 +25,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget _getScreenFromIndex(int index) {
     switch (index) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 2:
-        return AddScreen();
+        return const AddScreen();
       case 3:
-        return ProfileScreen();
+        return const ProfileScreen();
       case 4:
-        return SettingsScreen();
+        return const SettingsScreen();
       default:
-        return HistoryScreen(); // Stay on HistoryScreen when index is 1
+        return const HistoryScreen(); // Stay on HistoryScreen when index is 1
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3366FF),
+      backgroundColor: const Color(0xFF3366FF),
       appBar: CustomAppBar(
         title: "History",
         onBackPressed: () {
@@ -48,7 +50,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 12.0,
             mainAxisSpacing: 12.0,

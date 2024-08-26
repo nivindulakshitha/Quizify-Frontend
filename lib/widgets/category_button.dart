@@ -7,7 +7,7 @@ class CategoryButton extends StatelessWidget {
   final String creationDate;
   final VoidCallback onTap;
 
-  CategoryButton({
+  const CategoryButton({super.key, 
     required this.icon,
     required this.name,
     required this.iconColor,
@@ -40,17 +40,17 @@ class CategoryButton extends StatelessWidget {
               size: 50,
               color: iconColor,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 5),
-            Text(
+            const SizedBox(height: 5),
+            const Text(
               'Create date:',
               style: TextStyle(
                 fontSize: 14,
@@ -59,7 +59,7 @@ class CategoryButton extends StatelessWidget {
             ),
             Text(
               creationDate,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),

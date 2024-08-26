@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:quizify/widgets/join_quiz_widget.dart';
 
 class JoinQuizScreen extends StatelessWidget {
+  const JoinQuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Join in Quiz'),
+        title: const Text('Join in Quiz'),
         backgroundColor: Colors.blue,
       ),
       body: JoinQuizWidget(
@@ -33,30 +35,32 @@ class JoinQuizScreen extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizDetailsScreen(),
+          builder: (context) => const QuizDetailsScreen(),
         ),
       );
     } else {
       // Handle error: show a message that the credentials are incorrect
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Invalid Quiz ID or Password')),
+        const SnackBar(content: Text('Invalid Quiz ID or Password')),
       );
     }
   }
 }
 
 class QuizDetailsScreen extends StatelessWidget {
+  const QuizDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('XYZ Quiz'),
+        title: const Text('XYZ Quiz'),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
@@ -64,7 +68,7 @@ class QuizDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: Text(
                 'Quiz found!',
                 style: TextStyle(
@@ -73,14 +77,14 @@ class QuizDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'XYZ Quiz',
                   style: TextStyle(
@@ -91,36 +95,36 @@ class QuizDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Created by',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(
                     'https://example.com/user-avatar.jpg'), // Replace with the actual avatar
               ),
               title: Text('Nadun Daluwatta'),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Quiz Details',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildQuizDetailRow('Quiz Type', 'MCQ'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildQuizDetailRow('Number of Questions', '15'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _buildQuizDetailRow('Quiz Duration', '10 min'),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -128,16 +132,16 @@ class QuizDetailsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StartQuizScreen(),
+                      builder: (context) => const StartQuizScreen(),
                     ),
                   );
                 },
-                child: Text('Start Quiz Now'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  textStyle: TextStyle(fontSize: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
+                child: const Text('Start Quiz Now'),
               ),
             ),
           ],
@@ -152,14 +156,14 @@ class QuizDetailsScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
         ),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
           ),
         ),
@@ -169,21 +173,23 @@ class QuizDetailsScreen extends StatelessWidget {
 }
 
 class StartQuizScreen extends StatelessWidget {
+  const StartQuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Implement the Start Quiz screen here
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('XYZ Quiz'),
+        title: const Text('XYZ Quiz'),
         backgroundColor: Colors.blue,
       ),
-      body: Center(
+      body: const Center(
         child: Text('Start Quiz Screen - Implement Questions Here'),
       ),
     );

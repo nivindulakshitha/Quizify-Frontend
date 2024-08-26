@@ -9,6 +9,8 @@ import 'logout_screen.dart'; // Import the LogoutScreen
 import 'package:quizify/widgets/custom_app_bar.dart'; // Import the CustomAppBar widget
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -27,15 +29,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _getScreenFromIndex(int index) {
     switch (index) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 1:
-        return HistoryScreen();
+        return const HistoryScreen();
       case 2:
-        return AddScreen();
+        return const AddScreen();
       case 3:
-        return ProfileScreen();
+        return const ProfileScreen();
       default:
-        return SettingsScreen();
+        return const SettingsScreen();
     }
   }
 
@@ -49,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         },
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             _buildSettingsItem(
@@ -86,7 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // Navigate to the About Us screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                  MaterialPageRoute(builder: (context) => const AboutScreen()),
                 );
               },
             ),
@@ -128,15 +130,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       leading: Icon(icon, color: Colors.black54),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: Colors.black87,
         ),
       ),
       trailing:
-          trailing ?? Icon(Icons.arrow_forward_ios, color: Colors.black54),
+          trailing ?? const Icon(Icons.arrow_forward_ios, color: Colors.black54),
       onTap: onTap,
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),

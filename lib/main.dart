@@ -36,9 +36,9 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(), // Login screen route
         '/createAccount': (context) =>
             CreateAccountScreen(), // Create Account screen route
-        '/forgotPassword': (context) => ForgotPasswordScreen(),
+        '/forgotPassword': (context) => const ForgotPasswordScreen(),
         '/checkEmail': (context) =>
-            CheckEmailScreen(), // Forgot Password screen route
+            const CheckEmailScreen(), // Forgot Password screen route
       },
     );
   }

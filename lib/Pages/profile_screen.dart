@@ -8,6 +8,8 @@ import 'package:quizify/widgets/custom_app_bar.dart'; // Import the custom app b
 import '../widgets/category_button.dart'; // Import the CategoryButton widget
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -23,15 +25,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _getScreenFromIndex(int index) {
     switch (index) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 1:
-        return HistoryScreen();
+        return const HistoryScreen();
       case 2:
-        return AddScreen();
+        return const AddScreen();
       case 4:
-        return SettingsScreen();
+        return const SettingsScreen();
       default:
-        return ProfileScreen();
+        return const ProfileScreen();
     }
   }
 
@@ -50,11 +52,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // User Profile Section
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 184, 227, 255),
                 borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 5.0,
@@ -64,13 +66,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30.0,
                     backgroundImage:
                         AssetImage('assets/user.png'), // Demo image
                   ),
-                  SizedBox(width: 16.0),
-                  Column(
+                  const SizedBox(width: 16.0),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -91,9 +93,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
-                    icon: Icon(Icons.edit, color: Color(0xFF3366FF)),
+                    icon: const Icon(Icons.edit, color: Color(0xFF3366FF)),
                     onPressed: () {
                       // Edit profile action
                     },
@@ -101,9 +103,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             // "Quiz Created by You." Text
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Quiz Created by You.",
@@ -114,11 +116,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             // Quizzes Section
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12.0,
                   mainAxisSpacing: 12.0,

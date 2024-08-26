@@ -40,7 +40,7 @@ class CreateAccountScreen extends StatelessWidget {
                       color: Color(0xFF3366FF),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextField(
                     controller:
                         usernameController, // Controller for the Username TextField:nivindulakshitha

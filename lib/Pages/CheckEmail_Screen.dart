@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CheckEmailScreen extends StatelessWidget {
+  const CheckEmailScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3366FF),
+      backgroundColor: const Color(0xFF3366FF),
       body: GestureDetector(
         onTap: () {
           // Dismiss the keyboard when tapping outside of text fields
@@ -19,11 +21,11 @@ class CheckEmailScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(25),
               ),
-              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Check Your Email",
                     style: TextStyle(
                       fontSize: 35,
@@ -31,18 +33,18 @@ class CheckEmailScreen extends StatelessWidget {
                       color: Color(0xFF3366FF),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Image.asset(
                     'assets/password.png',
                     height: 250,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("You have not receved the email  "),
+                      const Text("You have not receved the email  "),
                       GestureDetector(
-                        child: Text(
+                        child: const Text(
                           "Resend",
                           style: TextStyle(
                             color: Color(0xFF3366FF),

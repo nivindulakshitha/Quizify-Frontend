@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
+                                builder: (context) => const HomeScreen()),
                           );
                         } else {
                           // Display an error message to the user

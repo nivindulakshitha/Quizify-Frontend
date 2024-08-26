@@ -6,7 +6,7 @@ class JoinQuizWidget extends StatelessWidget {
 
   final VoidCallback onJoinQuiz;
 
-  JoinQuizWidget({required this.onJoinQuiz});
+  JoinQuizWidget({super.key, required this.onJoinQuiz});
 
   @override
   Widget build(BuildContext context) {
@@ -17,34 +17,34 @@ class JoinQuizWidget extends StatelessWidget {
         children: [
           TextField(
             controller: _quizIdController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Quiz ID',
               hintText: 'Enter Quiz ID',
               border: OutlineInputBorder(),
             ),
             keyboardType: TextInputType.number,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             controller: _quizPasswordController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Quiz Password',
               hintText: 'Enter Quiz Password',
               border: OutlineInputBorder(),
             ),
             obscureText: true,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: onJoinQuiz,
-              child: Text('Join'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: 16),
-                textStyle: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 16),
               ),
+              child: const Text('Join'),
             ),
           ),
         ],

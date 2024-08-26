@@ -17,6 +17,8 @@ import 'profile_screen.dart'; // Import the ProfileScreen
 import 'settings_screen.dart'; // Import the SettingsScreen
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -34,31 +36,31 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0: // Home
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
         break;
       case 1: // History
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HistoryScreen()),
+          MaterialPageRoute(builder: (context) => const HistoryScreen()),
         );
         break;
       case 2: // Add (Center Button)
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => AddScreen()),
+          MaterialPageRoute(builder: (context) => const AddScreen()),
         );
         break;
       case 3: // Profile
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => const ProfileScreen()),
         );
         break;
       case 4: // Settings
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SettingsScreen()),
+          MaterialPageRoute(builder: (context) => const SettingsScreen()),
         );
         break;
     }
@@ -67,14 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3366FF),
+      backgroundColor: const Color(0xFF3366FF),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 'Welcome!',
                 style: TextStyle(
                   fontSize: 24,
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              Text(
+              const Text(
                 'Nadun Daluwatta',
                 style: TextStyle(
                   fontSize: 28,
@@ -90,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -102,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CreateQuizScreen()),
+                            builder: (context) => const CreateQuizScreen()),
                       );
                     },
                   ),
@@ -114,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => JoinQuizScreen()),
+                            builder: (context) => const JoinQuizScreen()),
                       );
                     },
                   ),
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Open Quizzes',
                       style: TextStyle(
                         fontSize: 18,
@@ -138,10 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AllQuizzesScreen()),
+                              builder: (context) => const AllQuizzesScreen()),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'See all',
                         style: TextStyle(
                           color: Colors.white,
@@ -178,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
@@ -192,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         crossAxisSpacing: 16.0,
         mainAxisSpacing: 16.0,
         children: <Widget>[
@@ -204,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ScienceQuizScreen()),
+                MaterialPageRoute(builder: (context) => const ScienceQuizScreen()),
               );
             },
           ),
@@ -216,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GeographyQuizScreen()),
+                MaterialPageRoute(builder: (context) => const GeographyQuizScreen()),
               );
             },
           ),
@@ -228,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SportsQuizScreen()),
+                MaterialPageRoute(builder: (context) => const SportsQuizScreen()),
               );
             },
           ),
@@ -240,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BiologyQuizScreen()),
+                MaterialPageRoute(builder: (context) => const BiologyQuizScreen()),
               );
             },
           ),

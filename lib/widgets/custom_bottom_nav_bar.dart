@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomBottomNavBar extends StatefulWidget {
   final Function(int) onTabSelected;
 
-  CustomBottomNavBar({required this.onTabSelected});
+  const CustomBottomNavBar({super.key, required this.onTabSelected});
 
   @override
   _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
@@ -22,8 +22,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: const BoxDecoration(
         color: Colors.blue,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
@@ -50,7 +50,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return GestureDetector(
       onTap: () => _onItemTapped(index),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(vertical: isCenter ? 10 : 0),
         decoration: isCenter
@@ -58,7 +58,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 shape: BoxShape.circle,
                 color: isSelected ? Colors.white : Colors.blue,
               )
-            : BoxDecoration(
+            : const BoxDecoration(
                 color: Colors.transparent,
               ),
         child: Icon(
