@@ -91,23 +91,16 @@ class CreateQuizWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   if (questionNumber == totalQuestions) {
-
                     quizProvider.setOwnerId(userProvider.user!.id);
 
-                    Map<String, dynamic> response = await
-                        quizProvider.submitQuiz();
+                    Map<String, dynamic> response =
+                        await quizProvider.submitQuiz();
 
                     if (response['success']) {
                       var data = response['data'];
 
-                      _showShareQuizDialog(context, data['name'], data['_id'], quizProvider.quiz.password, data['link']);
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(response['message']),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
+                      _showShareQuizDialog(context, data['name'], data['_id'],
+                          quizProvider.quiz.password, data['link']);
                     } else {
                       print(response['error']);
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -229,13 +222,17 @@ class CreateQuizWidget extends StatelessWidget {
     );
   }
 
-  void _showShareQuizDialog(BuildContext context, dynamic name, dynamic id, dynamic password, dynamic link) {
+  void _showShareQuizDialog(BuildContext context, dynamic name, dynamic id,
+      dynamic password, dynamic link) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return ShareQuizDialog(
           quizName: name,
-            quizId: id.replaceAllMapped(RegExp(r'\d{3}'), (match) => '${match.group(0)} ').trim(),
+          quizId: id
+              .replaceAllMapped(
+                  RegExp(r'\d{3}'), (match) => '${match.group(0)} ')
+              .trim(),
           password: password,
           // TODO: Invite link cannot be placed within the dialog, it should be shared via the share button
           inviteLink: link,
